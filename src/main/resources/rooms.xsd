@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://example.org/gen"
+           targetNamespace="http://example.org/gen" elementFormDefault="qualified">
+
+    <xs:element name="createRoomRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="createRoomDto" type="tns:room"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="createRoomResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="roomId" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="fetchRoomRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="roomId" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="fetchRoomResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="state" type="tns:roomState"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="room">
+        <xs:sequence>
+            <xs:element name="difficulty" type="xs:int"/>
+            <xs:element name="max" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="roomState">
+        <xs:sequence>
+            <xs:element name="difficulty" type="xs:int"/>
+            <xs:element name="max" type="xs:int"/>
+            <xs:element name="field" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="getRoomsRequest">
+<!--        <xs:complexType>-->
+<!--            <xs:sequence>-->
+<!--            </xs:sequence>-->
+<!--        </xs:complexType>-->
+    </xs:element>
+
+    <xs:element name="getRoomsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="room_list" type="tns:room_list"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="room_list">
+        <xs:sequence>
+            <xs:element name="rooms" type="xs:string" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
