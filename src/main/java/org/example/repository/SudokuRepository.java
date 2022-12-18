@@ -15,6 +15,11 @@ public class SudokuRepository {
 
     private final DSLContext dslContext;
 
+    /**
+     * Поиск в бд полей с заданной сложностью
+     * @param difficulty - сложность
+     * @return - список полей
+     */
     public List<GameField> fetchFieldsByDifficulty(Integer difficulty){
         return dslContext
                 .selectFrom(GAME_FIELD)

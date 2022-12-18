@@ -18,6 +18,10 @@ public class RoomEndpoint {
 
     private final RoomService roomService;
 
+    /**
+     * Эндпоинт для получения списка комнат на сервере
+     * @return - ответ со списком id комнат
+     */
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getRoomsRequest")
     @ResponsePayload
     public GetRoomsResponse getRooms() {
@@ -29,6 +33,11 @@ public class RoomEndpoint {
         return response;
     }
 
+    /**
+     * Эндпоинт для создания комнаты
+     * @param request - запрос со соложностью поля
+     * @return - ответ с id комнаты
+     */
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "createRoomRequest")
     @ResponsePayload
     public CreateRoomResponse createRoom(@RequestPayload CreateRoomRequest request) {
@@ -37,6 +46,11 @@ public class RoomEndpoint {
         return response;
     }
 
+    /**
+     * Эндпоинт для получения состояния
+     * @param request - запрос с указанным id комнаты
+     * @return - ответ с текущим состоянием комнаты
+     */
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "fetchRoomRequest")
     @ResponsePayload
     public FetchRoomResponse fetchRoom(@RequestPayload FetchRoomRequest request) {

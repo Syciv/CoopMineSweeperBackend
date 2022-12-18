@@ -37,8 +37,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
     public HandshakeInterceptor auctionInterceptor() {
         return new HandshakeInterceptor() {
             @Override
-            public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response,
-                                           WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
+            public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Map<String, Object> attributes){
 
                 String path = request.getURI().getPath();
                 String roomId = path.substring(path.lastIndexOf('/') + 1);
@@ -47,8 +46,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
             }
 
             @Override
-            public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response,
-                                       WebSocketHandler wsHandler, Exception exception) {
+            public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Exception exception) {
             }
         };
     }

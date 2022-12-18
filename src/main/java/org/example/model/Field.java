@@ -17,6 +17,12 @@ public class Field {
     private List<List<Cell>> cellsSolved;
     private List<List<Cell>> cellsCurrent;
 
+    /**
+     * Конструктор - инициализация поля судоку
+     * @param unsolved - исходное поле
+     * @param solved - решение поля
+     * @param difficulty - сложность поля
+     */
     public Field(String unsolved, String solved, Integer difficulty){
         this.difficulty = difficulty;
 
@@ -40,13 +46,22 @@ public class Field {
                 cellsSolved.get(i).add(cellSolved);
             }
         }
-//        showField();
     }
 
+    /**
+     * Установка значения в клеточку поля
+     * @param height - координата y
+     * @param width - координата x
+     * @param value - значение
+     */
     public void setValue(Integer height, Integer width, Integer value){
         cellsUnsolved.get(height).get(width).setValue(value);
     }
 
+    /**
+     * Проверка правильности заполненного поля
+     * @return - флаг правильности
+     */
     public Boolean check() {
         boolean check = true;
         for (int i = 0; i < height; i++) {
@@ -57,6 +72,10 @@ public class Field {
         return check;
     }
 
+    /**
+     * Конвертация теекущего поля в строку
+     * @return строка с текущим состоянием поля
+     */
     public String fieldString(){
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < height; i++) {
@@ -67,6 +86,9 @@ public class Field {
         return result.toString();
     }
 
+    /**
+     * Вывод поля в консоль
+     */
     public void showField(){
         System.out.println("-----field------");
         for (int i = 0; i < height; i++) {

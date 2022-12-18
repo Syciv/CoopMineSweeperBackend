@@ -31,6 +31,7 @@ public class RoomSocketHandler extends TextWebSocketHandler implements SubProtoc
     public void afterConnectionEstablished(WebSocketSession session) {
         String roomId = (String) session.getAttributes().get("roomId");
         if(Objects.nonNull(roomService.getRoom(roomId))) {
+            // Добавление клиента в комнату
             if (!roomSessionsMap.containsKey(roomId)) {
                 roomSessionsMap.put(roomId, new HashSet<>());
             }
@@ -43,7 +44,7 @@ public class RoomSocketHandler extends TextWebSocketHandler implements SubProtoc
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
-        logger.info("Server connection closed: {}", status);
+        logger.info("Соединение закрыто: {}", status);
         String roomId = (String) session.getAttributes().get("roomId");
         roomSessionsMap.get(roomId).remove(session);
     }
@@ -54,15 +55,15 @@ public class RoomSocketHandler extends TextWebSocketHandler implements SubProtoc
         String roomId = (String) session.getAttributes().get("roomId");
 
         roomService.setValue(roomId, new Gson().fromJson(message.getPayload(), MessageDto.class));
-//        roomService.showRooms();
+        logger.info("Получено сообщение: {}", request);
 
-        logger.info("Server received: {}", request);
+        // Отправка сообщения всем клиетам в этой комнате
         sendToAll(roomId, message, session);
     }
 
     @Override
     public void handleTransportError(WebSocketSession session, Throwable exception) {
-        logger.info("Server transport error: {}", exception.getMessage());
+        logger.info("Ошибка: {}", exception.getMessage());
     }
 
     @Override
@@ -72,7 +73,6 @@ public class RoomSocketHandler extends TextWebSocketHandler implements SubProtoc
 
     @SneakyThrows
     private void sendToAll(String roomId, TextMessage message, WebSocketSession sender) {
-
         for(WebSocketSession session : roomSessionsMap.get(roomId)){
             if(!sender.equals(session)) {
                 session.sendMessage(message);
