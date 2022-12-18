@@ -18,7 +18,6 @@ public class RoomEndpoint {
 
     private final RoomService roomService;
 
-
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getRoomsRequest")
     @ResponsePayload
     public GetRoomsResponse getRooms() {

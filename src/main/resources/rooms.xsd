@@ -50,10 +50,6 @@
     </xs:complexType>
 
     <xs:element name="getRoomsRequest">
-<!--        <xs:complexType>-->
-<!--            <xs:sequence>-->
-<!--            </xs:sequence>-->
-<!--        </xs:complexType>-->
     </xs:element>
 
     <xs:element name="getRoomsResponse">
